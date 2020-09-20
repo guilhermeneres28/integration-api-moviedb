@@ -33,4 +33,15 @@ public class GenreControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray());
     }
+
+    @Test
+    void should_success_when_return_atleast_one_genre() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/v1/genres")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$.[0].id").exists())
+                .andExpect(jsonPath("$.[0].name").exists());
+    }
 }
