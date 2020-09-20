@@ -1,6 +1,4 @@
-package br.com.dev.desafioclickbus.movie;
-
-import org.springframework.web.client.RestClientException;
+package br.com.dev.desafioclickbus.movie.exceptions;
 
 public class SearchMovieIntegrationException extends Exception {
     public SearchMovieIntegrationException(String message) {

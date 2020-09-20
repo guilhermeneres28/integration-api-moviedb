@@ -1,4 +1,4 @@
-package br.com.dev.desafioclickbus.movie;
+package br.com.dev.desafioclickbus.movie.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

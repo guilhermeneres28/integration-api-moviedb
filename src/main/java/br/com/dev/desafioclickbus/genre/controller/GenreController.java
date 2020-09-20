@@ -1,5 +1,8 @@
-package br.com.dev.desafioclickbus.genre;
+package br.com.dev.desafioclickbus.genre.controller;
 
+import br.com.dev.desafioclickbus.genre.dto.GenreDTO;
+import br.com.dev.desafioclickbus.genre.exceptions.GenreIntegrationException;
+import br.com.dev.desafioclickbus.genre.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

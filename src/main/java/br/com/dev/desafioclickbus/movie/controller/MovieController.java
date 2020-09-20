@@ -1,5 +1,11 @@
-package br.com.dev.desafioclickbus.movie;
+package br.com.dev.desafioclickbus.movie.controller;
 
+import br.com.dev.desafioclickbus.movie.dto.MovieDTO;
+import br.com.dev.desafioclickbus.movie.dto.MovieDetailDTO;
+import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieDetailIntegrationException;
+import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieIntegrationException;
+import br.com.dev.desafioclickbus.movie.model.MovieSearchRequestForm;
+import br.com.dev.desafioclickbus.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

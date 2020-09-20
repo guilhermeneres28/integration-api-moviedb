@@ -1,5 +1,11 @@
-package br.com.dev.desafioclickbus.movie;
+package br.com.dev.desafioclickbus.movie.service;
 
+import br.com.dev.desafioclickbus.movie.dto.MovieDTO;
+import br.com.dev.desafioclickbus.movie.dto.MovieDetailDTO;
+import br.com.dev.desafioclickbus.movie.dto.PageDTO;
+import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieDetailIntegrationException;
+import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieIntegrationException;
+import br.com.dev.desafioclickbus.movie.model.MovieSearchRequestForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +16,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -29,10 +34,10 @@ public class MovieService {
 
     public Optional<List<MovieDTO>> searchFromApi(MovieSearchRequestForm form) throws SearchMovieIntegrationException {
         try {
-           final ResponseEntity<Root> response = restTemplate
-                   .getForEntity(BASE_API_URL + "search/movie?api_key=" + API_KEY +  "&query=" + form.getQuery(), Root.class);
+           final ResponseEntity<PageDTO> response = restTemplate
+                   .getForEntity(BASE_API_URL + "search/movie?api_key=" + API_KEY +  "&query=" + form.getQuery(), PageDTO.class);
            if(response.getStatusCode().is2xxSuccessful())
-               return Optional.ofNullable(response.getBody()).map(Root::getResults).filter(results -> !results.isEmpty());
+               return Optional.ofNullable(response.getBody()).map(PageDTO::getResults).filter(results -> !results.isEmpty());
         } catch (RestClientException restClientException) {
             log.error("Error to integrate with movie search api" + restClientException.getMessage());
             throw new SearchMovieIntegrationException("Error retriving movie data");

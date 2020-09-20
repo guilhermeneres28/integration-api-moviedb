@@ -1,6 +1,5 @@
-package br.com.dev.desafioclickbus.movie;
+package br.com.dev.desafioclickbus.movie.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
