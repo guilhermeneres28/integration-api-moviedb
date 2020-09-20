@@ -3,6 +3,7 @@ package br.com.dev.desafioclickbus.genre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -14,8 +15,12 @@ import java.util.*;
 public class GenreService {
 
     private static final Logger log = LoggerFactory.getLogger(GenreService.class);
-    private static final String BASE_API_URL = "https://api.themoviedb.org/3/";
-    private static final String API_KEY = "88b3d3285d2e4b4e6fa0838c97c1ff68";
+
+    @Value("${base-integration-api-url}")
+    private String BASE_API_URL;
+
+    @Value("${api-integration-key}")
+    private  String API_KEY;
 
     @Autowired
     private RestTemplate restTemplate;
