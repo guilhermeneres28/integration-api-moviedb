@@ -6,31 +6,16 @@ import br.com.dev.desafioclickbus.movie.dto.PageDTO;
 import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieDetailIntegrationException;
 import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieIntegrationException;
 import br.com.dev.desafioclickbus.movie.model.MovieSearchRequestForm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import br.com.dev.desafioclickbus.shared.service.BaseIntegrationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MovieService {
-
-    private static final Logger log = LoggerFactory.getLogger(MovieService.class);
-
-    @Value("${base-integration-api-url}")
-    private String BASE_API_URL;
-
-    @Value("${api-integration-key}")
-    private  String API_KEY;
-
-    @Autowired
-    private RestTemplate restTemplate;
+public class MovieIntegrationService extends BaseIntegrationService {
 
     public Optional<List<MovieDTO>> searchFromApi(MovieSearchRequestForm form) throws SearchMovieIntegrationException {
         try {
