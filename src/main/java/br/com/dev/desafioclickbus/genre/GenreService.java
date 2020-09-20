@@ -14,8 +14,8 @@ import java.util.*;
 public class GenreService {
 
     private static final Logger log = LoggerFactory.getLogger(GenreService.class);
-    public static final String BASE_API_URL = "https://api.themoviedb.org/3/";
-    public static final String API_KEY = "88b3d3285d2e4b4e6fa0838c97c1ff68";
+    private static final String BASE_API_URL = "https://api.themoviedb.org/3/";
+    private static final String API_KEY = "88b3d3285d2e4b4e6fa0838c97c1ff68";
 
     @Autowired
     private RestTemplate restTemplate;
