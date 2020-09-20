@@ -28,7 +28,7 @@ public class GenreService {
     public Optional<List<GenreDTO>> getGenresFromApi() throws GenreIntegrationException {
         try {
             final ResponseEntity<GenreList> response = restTemplate
-                    .getForEntity(BASE_API_URL + "genre/movie/list?api_key=" + API_KEY + "&language=en-US", GenreList.class);
+                    .getForEntity(BASE_API_URL + "genre/movie/list?api_key=" + API_KEY, GenreList.class);
             if(response.getStatusCode().is2xxSuccessful())
                 return response.getBody() != null ? Optional.of(response.getBody().getGenres()) : Optional.empty();
         } catch (RestClientException restClientException) {

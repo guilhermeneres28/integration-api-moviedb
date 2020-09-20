@@ -10,6 +10,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,19 @@ public class MovieService {
         } catch (RestClientException restClientException) {
             log.error("Error to integrate with movie search api" + restClientException.getMessage());
             throw new SearchMovieIntegrationException("Error retriving movie data");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<MovieDetailDTO> findDetailFromApi(String movieId) throws SearchMovieDetailIntegrationException {
+        try {
+            final ResponseEntity<MovieDetailDTO> response = restTemplate
+                    .getForEntity(BASE_API_URL + "/movie/" + movieId + "?api_key=" + API_KEY, MovieDetailDTO.class);
+            if(response.getStatusCode().is2xxSuccessful())
+                return Optional.ofNullable(response.getBody());
+        } catch (RestClientException restClientException) {
+            log.error("Error retrieving movie detail" + restClientException.getMessage());
+            throw new SearchMovieDetailIntegrationException("Error retriving movie data");
         }
         return Optional.empty();
     }

@@ -2,10 +2,7 @@ package br.com.dev.desafioclickbus.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +17,13 @@ public class MovieController {
     @PostMapping
     public ResponseEntity<List<MovieDTO>> search(@RequestBody @Valid MovieSearchRequestForm form) throws SearchMovieIntegrationException {
         return movieService.searchFromApi(form)
+                .map(ResponseEntity::ok)
+                .orElseGet(ResponseEntity.noContent()::build);
+    }
+
+    @GetMapping("/{movieId}")
+    public ResponseEntity<MovieDetailDTO> getDetails(@PathVariable("movieId") String movieId) throws SearchMovieDetailIntegrationException {
+        return movieService.findDetailFromApi(movieId)
                 .map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.noContent()::build);
     }

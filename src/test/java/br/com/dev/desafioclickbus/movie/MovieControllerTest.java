@@ -67,10 +67,29 @@ public class MovieControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void should_success_when_find_movie_detail() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/v1/movies/2154"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.adult").exists())
+                .andExpect(jsonPath("$.budget").exists())
+                .andExpect(jsonPath("$.homepage").exists())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.overview").exists())
+                .andExpect(jsonPath("$.popularity").exists())
+                .andExpect(jsonPath("$.revenue").exists())
+                .andExpect(jsonPath("$.title").exists())
+                .andExpect(jsonPath("$.release_date").exists())
+                .andExpect(jsonPath("$.vote_count").exists())
+                .andExpect(jsonPath("$.vote_average").exists());
+    }
+
+
     private <T> ResultActions performPost(T body) throws Exception {
         String jsonBody = toJson(body);
         return mockMvc.perform(MockMvcRequestBuilders
-                .post("/v1/movies")
+                .post("/v1/movies/")
                 .content(jsonBody)
                 .contentType(MediaType.APPLICATION_JSON));
     }

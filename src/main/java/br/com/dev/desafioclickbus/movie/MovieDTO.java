@@ -2,25 +2,27 @@ package br.com.dev.desafioclickbus.movie;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.Collections;
 import java.util.List;
 
+@Getter
 public class MovieDTO{
-    public double popularity;
-    public int vote_count;
-    public boolean video;
-    public String poster_path;
-    public int id;
-    public boolean adult;
-    public String backdrop_path;
-    public String original_language;
-    public String original_title;
-    public List<Integer> genre_ids;
-    public String title;
-    public double vote_average;
-    public String overview;
-    public String release_date;
+    private double popularity;
+    private int vote_count;
+    private boolean video;
+    private String poster_path;
+    private int id;
+    private boolean adult;
+    private String backdrop_path;
+    private String original_language;
+    private String original_title;
+    private List<Integer> genre_ids;
+    private String title;
+    private double vote_average;
+    private String overview;
+    private String release_date;
 }
 
 class Root{
