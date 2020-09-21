@@ -4,7 +4,6 @@ import br.com.dev.desafioclickbus.genre.dto.GenreDTO;
 import br.com.dev.desafioclickbus.genre.dto.GenreListDTO;
 import br.com.dev.desafioclickbus.genre.exceptions.GenreIntegrationException;
 import br.com.dev.desafioclickbus.shared.service.BaseIntegrationService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
