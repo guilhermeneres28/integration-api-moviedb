@@ -29,7 +29,10 @@ mvn spring-boot:run
  docker build -t {image_name} . && docker run -p 8080:8080 --name {container-name} {builded_image_name} .
 ```
 
-### After run the api, swagger docs is avaible at (http://localhost:8080/swagger-ui.html#/)
+### After run the api, swagger docs is available at (http://localhost:8080/swagger-ui.html#/)
+
+
+### This springboot api is also available at (https://api-integration-moviedb.herokuapp.com/swagger-ui.html#/)
 
 
 
