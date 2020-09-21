@@ -5,7 +5,7 @@ import br.com.dev.desafioclickbus.movie.dto.MovieDetailDTO;
 import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieDetailIntegrationException;
 import br.com.dev.desafioclickbus.movie.exceptions.SearchMovieIntegrationException;
 import br.com.dev.desafioclickbus.movie.model.MovieSearchRequestForm;
-import br.com.dev.desafioclickbus.movie.service.MovieService;
+import br.com.dev.desafioclickbus.movie.service.MovieIntegrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import java.util.List;
 public class MovieController {
 
     @Autowired
-    private MovieService movieService;
+    private MovieIntegrationService movieService;
 
     @PostMapping
     public ResponseEntity<List<MovieDTO>> search(@RequestBody @Valid MovieSearchRequestForm form) throws SearchMovieIntegrationException {
