@@ -35,3 +35,63 @@ mvn spring-boot:run
 
 
 ### This springboot api is also available at (https://api-integration-moviedb.herokuapp.com/swagger-ui.html#/)
+
+### The base architecture
+
+```bash
+    ├── src/
+    │   ├── main/
+    │   │   ├── java/
+    │   │   │   └── br/
+    │   │   │       └── com/
+    │   │   │           └── dev/
+    │   │   │               └── desafioclickbus/
+    │   │   │                   ├── ApiDesafioClickbusApplication.java
+    │   │   │                   ├── genre/
+    │   │   │                   │   ├── controller/
+    │   │   │                   │   │   └── GenreController.java
+    │   │   │                   │   ├── dto/
+    │   │   │                   │   │   ├── GenreDTO.java
+    │   │   │                   │   │   └── GenreListDTO.java
+    │   │   │                   │   ├── exceptions/
+    │   │   │                   │   │   └── GenreIntegrationException.java
+    │   │   │                   │   └── service/
+    │   │   │                   │       └── GenreService.java
+    │   │   │                   ├── movie/
+    │   │   │                   │   ├── controller/
+    │   │   │                   │   │   └── MovieController.java
+    │   │   │                   │   ├── dto/
+    │   │   │                   │   │   ├── MovieDetailDTO.java
+    │   │   │                   │   │   ├── MovieDTO.java
+    │   │   │                   │   │   └── PageDTO.java
+    │   │   │                   │   ├── exceptions/
+    │   │   │                   │   │   ├── SearchMovieDetailIntegrationException.java
+    │   │   │                   │   │   └── SearchMovieIntegrationException.java
+    │   │   │                   │   ├── model/
+    │   │   │                   │   │   └── MovieSearchRequestForm.java
+    │   │   │                   │   └── service/
+    │   │   │                   │       └── MovieIntegrationService.java
+    │   │   │                   └── shared/
+    │   │   │                       ├── configuration/
+    │   │   │                       │   └── SpringFoxSwaggerConfig.java
+    │   │   │                       └── service/
+    │   │   │                           └── BaseIntegrationService.java
+    │   │   └── resources/
+    │   │       ├── application.properties
+    │   │       ├── static/
+    │   │       └── templates/
+    │   └── test/
+    │       └── java/
+    │           └── br/
+    │               └── com/
+    │                   └── dev/
+    │                       └── desafioclickbus/
+    │                           ├── ApiDesafioClickbusApplicationTests.java
+    │                           ├── genre/
+    │                           │   └── GenreControllerTest.java
+    │                           ├── movie/
+    │                           │   └── MovieControllerTest.java
+    │                           └── util/
+    │                               └── TestUtil.java
+
+```
