@@ -1,21 +1,17 @@
 package br.com.dev.desafioclickbus.movie;
 
 import br.com.dev.desafioclickbus.movie.model.MovieSearchRequestForm;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import br.com.dev.desafioclickbus.util.TestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static br.com.dev.desafioclickbus.util.TestUtil.performPost;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -23,6 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest()
 public class MovieControllerTest {
+
+    private static final String MOVIE_URL = "/v1/movies/";
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,7 +30,7 @@ public class MovieControllerTest {
         final String movieName = "Avengers";
         final MovieSearchRequestForm movieSearchRequestForm = new MovieSearchRequestForm(movieName);
 
-        performPost(movieSearchRequestForm)
+        performPost(mockMvc, MOVIE_URL, movieSearchRequestForm)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray());
     }
@@ -42,7 +40,7 @@ public class MovieControllerTest {
         final String movieName = "Avengers";
         final MovieSearchRequestForm movieSearchRequestForm = new MovieSearchRequestForm(movieName);
 
-        performPost(movieSearchRequestForm)
+        performPost(mockMvc, MOVIE_URL, movieSearchRequestForm)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0]").isNotEmpty());
@@ -53,7 +51,7 @@ public class MovieControllerTest {
         final String movieName = "Movie notFound";
         final MovieSearchRequestForm movieSearchRequestForm = new MovieSearchRequestForm(movieName);
 
-        performPost(movieSearchRequestForm)
+        performPost(mockMvc, MOVIE_URL, movieSearchRequestForm)
                 .andExpect(status().isNoContent());
     }
 
@@ -62,7 +60,7 @@ public class MovieControllerTest {
         final String movieName = "";
         final MovieSearchRequestForm movieSearchRequestForm = new MovieSearchRequestForm(movieName);
 
-        performPost(movieSearchRequestForm)
+        performPost(mockMvc, MOVIE_URL, movieSearchRequestForm)
                 .andExpect(status().isBadRequest());
     }
 
@@ -82,21 +80,5 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$.release_date").exists())
                 .andExpect(jsonPath("$.vote_count").exists())
                 .andExpect(jsonPath("$.vote_average").exists());
-    }
-
-
-    private <T> ResultActions performPost(T body) throws Exception {
-        String jsonBody = toJson(body);
-        return mockMvc.perform(MockMvcRequestBuilders
-                .post("/v1/movies/")
-                .content(jsonBody)
-                .contentType(MediaType.APPLICATION_JSON));
-    }
-
-    private <T> String toJson(T t) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
-        return objectWriter.writeValueAsString(t);
     }
 }
